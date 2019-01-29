@@ -15,8 +15,8 @@ use Spatie\Permission\Contracts\Permission;
 use Spatie\Permission\Traits\HasRoles;
 use TypiCMS\Modules\Core\Models\Base;
 use TypiCMS\Modules\History\Traits\Historable;
-use TypiCMS\Modules\Customers\Notifications\ResetPassword;
-use TypiCMS\Modules\Customers\Presenters\ModulePresenter;
+use Codivist\Modules\Customers\Notifications\ResetPassword;
+use Codivist\Modules\Customers\Presenters\ModulePresenter;
 
 class Customer extends Base implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
