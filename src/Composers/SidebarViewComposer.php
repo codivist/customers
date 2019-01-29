@@ -14,7 +14,7 @@ class SidebarViewComposer
         if (Gate::denies('see-all-customers')) {
             return;
         }
-        $view->sidebar->group(__('Customers and roles'), function (SidebarGroup $group) {
+        $view->sidebar->group(__('Users and roles'), function (SidebarGroup $group) {
             $group->id = 'customers';
             $group->weight = 50;
             $group->addItem(__('Customers'), function (SidebarItem $item) {
