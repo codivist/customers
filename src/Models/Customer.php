@@ -1,6 +1,6 @@
 <?php
 
-namespace TypiCMS\Modules\Users\Models;
+namespace Codivist\Modules\Customers\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -15,10 +15,10 @@ use Spatie\Permission\Contracts\Permission;
 use Spatie\Permission\Traits\HasRoles;
 use TypiCMS\Modules\Core\Models\Base;
 use TypiCMS\Modules\History\Traits\Historable;
-use TypiCMS\Modules\Users\Notifications\ResetPassword;
-use TypiCMS\Modules\Users\Presenters\ModulePresenter;
+use TypiCMS\Modules\Customers\Notifications\ResetPassword;
+use TypiCMS\Modules\Customers\Presenters\ModulePresenter;
 
-class User extends Base implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
+class Customer extends Base implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
     use Authenticatable;
     use Authorizable;
@@ -77,7 +77,7 @@ class User extends Base implements AuthenticatableContract, AuthorizableContract
     }
 
     /**
-     * Confirm the user.
+     * Confirm the customer.
      *
      * @return null
      */
@@ -96,14 +96,14 @@ class User extends Base implements AuthenticatableContract, AuthorizableContract
     public static function boot()
     {
         parent::boot();
-        static::creating(function ($user) {
-            $user->token = str_random(30);
-            $user->api_token = Str::uuid();
+        static::creating(function ($customer) {
+            $customer->token = str_random(30);
+            $customer->api_token = Str::uuid();
         });
     }
 
     /**
-     * Check if the user is a superuser.
+     * Check if the customer is a superuser.
      *
      * @return bool
      */

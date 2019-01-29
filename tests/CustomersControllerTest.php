@@ -1,18 +1,18 @@
 <?php
 
-class UsersControllerTest extends TestCase
+class CustomersControllerTest extends TestCase
 {
     public function testAdminIndex()
     {
-        $response = $this->call('GET', 'admin/users');
+        $response = $this->call('GET', 'admin/customers');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testStoreFails()
     {
         $input = ['email' => 'test'];
-        $this->call('POST', 'admin/users', $input);
-        $this->assertRedirectedToRoute('admin.users.create');
+        $this->call('POST', 'admin/customers', $input);
+        $this->assertRedirectedToRoute('admin.customers.create');
         $this->assertSessionHasErrors();
     }
 
@@ -25,8 +25,8 @@ class UsersControllerTest extends TestCase
             'password' => 'testtest',
             'password_confirmation' => 'testtest',
         ];
-        $this->call('POST', 'admin/users', $input);
-        $this->assertRedirectedToRoute('admin.users.edit', ['id' => 2]);
+        $this->call('POST', 'admin/customers', $input);
+        $this->assertRedirectedToRoute('admin.customers.edit', ['id' => 2]);
     }
 
     public function testStoreSuccessWithRedirectToList()
@@ -39,7 +39,9 @@ class UsersControllerTest extends TestCase
             'password_confirmation' => 'testtest',
             'exit' => true,
         ];
-        $this->call('POST', 'admin/users', $input);
-        $this->assertRedirectedToRoute('admin.users.index');
+        $this->call('POST', 'admin/customers', $input);
+        $this->assertRedirectedToRoute('admin.customers.index');
     }
+
+    // @Todo add test to test for duplicate email
 }

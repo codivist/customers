@@ -46,5 +46,5 @@
 </div>
 @endif
 
-<label>{{ __('User permissions') }}</label>
+<label>{{ __('Customer permissions') }}</label>
 @include('core::admin._permissions-form')

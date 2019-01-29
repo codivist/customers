@@ -1,11 +1,11 @@
 <?php
 
-namespace TypiCMS\Modules\Users\Http\Controllers;
+namespace Codivist\Modules\Customers\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use TypiCMS\Modules\Users\Models\User;
+use TypiCMS\Modules\Customers\Models\Customer;
 
 class LoginController extends Controller
 {
@@ -14,16 +14,16 @@ class LoginController extends Controller
     | Login Controller
     |--------------------------------------------------------------------------
     |
-    | This controller handles authenticating users for the application and
+    | This controller handles authenticating customers for the application and
     | redirecting them to your home screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesCustomers;
 
     /**
-     * Where to redirect users after login.
+     * Where to redirect customers after login.
      *
      * @var string
      */
@@ -46,7 +46,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('users::login');
+        return view('customers::login');
     }
 
     /**
@@ -60,10 +60,10 @@ class LoginController extends Controller
     {
         $credentials = $this->credentials($request);
 
-        $user = User::where('email', $credentials['email'])->first();
-        if (!$user) {
+        $customer = Customer::where('email', $credentials['email'])->first();
+        if (!$customer) {
             $error = 'Cet utilisateur n’a pas été trouvé.';
-        } elseif (!$user->activated) {
+        } elseif (!$customer->activated) {
             $error = 'Cet utilisateur n’a pas été activé.';
         } else {
             $error = 'Le mot de passe est incorrect.';

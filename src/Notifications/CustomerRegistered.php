@@ -1,31 +1,31 @@
 <?php
 
-namespace TypiCMS\Modules\Users\Notifications;
+namespace Codivist\Modules\Customers\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use TypiCMS\Modules\Users\Models\User;
+use Codivist\Modules\Customers\Models\Customer;
 
-class UserRegistered extends Notification
+class CustomerRegistered extends Notification
 {
     use Queueable;
 
     /**
-     * The user instance.
+     * The customer instance.
      *
      * @var Order
      */
-    public $user;
+    public $customer;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(Customer $customer)
     {
-        $this->user = $user;
+        $this->customer = $customer;
     }
 
     /**
@@ -51,6 +51,6 @@ class UserRegistered extends Notification
     {
         return (new MailMessage())
                     ->line(__('Your account has been created, now you need to activate it.'))
-                    ->action(__('Activate my account'), route('activate', $this->user->token));
+                    ->action(__('Activate my account'), route('activate', $this->customer->token));
     }
 }

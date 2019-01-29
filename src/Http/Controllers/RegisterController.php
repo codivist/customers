@@ -1,14 +1,14 @@
 <?php
 
-namespace TypiCMS\Modules\Users\Http\Controllers;
+namespace Codivist\Modules\Customers\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
-use TypiCMS\Modules\Users\Http\Requests\FormRequestRegister;
-use TypiCMS\Modules\Users\Models\User;
-use TypiCMS\Modules\Users\Notifications\UserRegistered;
+use Codivist\Modules\Customers\Http\Requests\FormRequestRegister;
+use Codivist\Modules\Customers\Models\Customer;
+use Codivist\Modules\Customers\Notifications\CustomerRegistered;
 
 class RegisterController extends Controller
 {
@@ -17,16 +17,16 @@ class RegisterController extends Controller
     | Register Controller
     |--------------------------------------------------------------------------
     |
-    | This controller handles the registration of new users as well as their
+    | This controller handles the registration of new customers as well as their
     | validation and creation. By default this controller uses a trait to
     | provide this functionality without requiring any additional code.
     |
     */
 
-    use RegistersUsers;
+    use RegistersCustomers;
 
     /**
-     * Where to redirect users after login / registration.
+     * Where to redirect customers after login / registration.
      *
      * @var string
      */
@@ -49,23 +49,23 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        return view('users::register');
+        return view('customers::register');
     }
 
     /**
      * Handle a registration request for the application.
      *
-     * @param \TypiCMS\Modules\Users\Http\Requests\FormRequestRegister $request
+     * @param \TypiCMS\Modules\Customers\Http\Requests\FormRequestRegister $request
      *
      * @return \Illuminate\Http\Response
      */
     public function register(FormRequestRegister $request)
     {
-        $user = $this->create($request->all());
+        $customer = $this->create($request->all());
 
-        event(new Registered($user));
+        event(new Registered($customer));
 
-        $user->notify(new UserRegistered($user));
+        $customer->notify(new CustomerRegistered($customer));
 
         return redirect()
             ->back()
@@ -73,15 +73,15 @@ class RegisterController extends Controller
     }
 
     /**
-     * Create a new user instance after a valid registration.
+     * Create a new customer instance after a valid registration.
      *
      * @param array $data
      *
-     * @return User
+     * @return Customer
      */
     protected function create(array $data)
     {
-        return User::create([
+        return Customer::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
@@ -90,7 +90,7 @@ class RegisterController extends Controller
     }
 
     /**
-     * Confirm a user’s email address.
+     * Confirm a customer’s email address.
      *
      * @param string $token
      *
@@ -98,9 +98,9 @@ class RegisterController extends Controller
      */
     public function activate($token)
     {
-        $user = User::where('token', $token)->firstOrFail();
+        $customer = Customer::where('token', $token)->firstOrFail();
 
-        $user->activate();
+        $customer->activate();
 
         return redirect()
             ->route('login')

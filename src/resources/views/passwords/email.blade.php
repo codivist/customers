@@ -16,13 +16,13 @@
 
 <div id="reset" class="container-reset small-container">
 
-    @include('users::_logo')
+    @include('customers::_logo')
 
     {!! BootForm::open()->action(route('password.email'))->addClass('small-container-form') !!}
 
         <h1 class="small-container-title">{{ __('Reset Password') }}</h1>
 
-        @include('users::_status')
+        @include('customers::_status')
 
         {!! BootForm::email(__('Email'), 'email')->addClass('form-control form-control-lg')->autofocus(true)->required() !!}
 

@@ -16,13 +16,13 @@
 
 <div id="register" class="container-register small-container">
 
-    @include('users::_logo')
+    @include('customers::_logo')
 
     {!! BootForm::open()->addClass('small-container-form') !!}
 
         <h1 class="small-container-title">{{ __('Register') }}</h1>
 
-        @include('users::_status')
+        @include('customers::_status')
 
         {!! BootForm::email(__('Email'), 'email')->addClass('form-control-lg')->required() !!}
         {!! BootForm::text(__('First name'), 'first_name')->addClass('form-control-lg')->required() !!}

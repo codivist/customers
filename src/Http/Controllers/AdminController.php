@@ -1,18 +1,18 @@
 <?php
 
-namespace TypiCMS\Modules\Users\Http\Controllers;
+namespace Codivist\Modules\Customers\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
-use TypiCMS\Modules\Users\Http\Requests\FormRequest;
-use TypiCMS\Modules\Users\Models\User;
-use TypiCMS\Modules\Users\Repositories\EloquentUser;
+use Codivist\Modules\Customers\Http\Requests\FormRequest;
+use Codivist\Modules\Customers\Models\Customer;
+use Codivist\Modules\Customers\Repositories\EloquentCustomer;
 
 class AdminController extends BaseAdminController
 {
-    public function __construct(EloquentUser $user)
+    public function __construct(EloquentCustomer $customer)
     {
-        parent::__construct($user);
+        parent::__construct($customer);
     }
 
     /**
@@ -22,7 +22,7 @@ class AdminController extends BaseAdminController
      */
     public function index()
     {
-        return view('users::admin.index');
+        return view('customers::admin.index');
     }
 
     /**
@@ -36,30 +36,30 @@ class AdminController extends BaseAdminController
         $model->permissions = [];
         $model->roles = [];
 
-        return view('users::admin.create')
+        return view('customers::admin.create')
             ->with(compact('model'));
     }
 
     /**
      * Edit form for the specified resource.
      *
-     * @param \TypiCMS\Modules\Users\Models\User $user
+     * @param \Codivist\Modules\Customers\Models\Customer $customer
      *
      * @return \Illuminate\View\View
      */
-    public function edit(User $user)
+    public function edit(Customer $customer)
     {
-        $user->permissions = $user->permissions()->pluck('name')->all();
-        $user->roles = $user->roles()->pluck('id')->all();
+        $customer->permissions = $customer->permissions()->pluck('name')->all();
+        $customer->roles = $customer->roles()->pluck('id')->all();
 
-        return view('users::admin.edit')
-            ->with(['model' => $user]);
+        return view('customers::admin.edit')
+            ->with(['model' => $customer]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \TypiCMS\Modules\Users\Http\Requests\FormRequest $request
+     * @param \Codivist\Modules\Customers\Http\Requests\FormRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -67,48 +67,48 @@ class AdminController extends BaseAdminController
     {
         $data = $request->all();
 
-        $userData = array_except($data, ['exit', 'permissions', 'roles', 'password_confirmation']);
-        $userData['password'] = Hash::make($data['password']);
+        $customerData = array_except($data, ['exit', 'permissions', 'roles', 'password_confirmation']);
+        $customerData['password'] = Hash::make($data['password']);
 
-        $user = $this->repository->create($userData);
+        $customer = $this->repository->create($customerData);
 
-        if ($user) {
+        if ($customer) {
             $roles = $data['roles'] ?? [];
-            $user->roles()->sync($roles);
+            $customer->roles()->sync($roles);
             $permissions = $data['permissions'] ?? [];
-            $user->syncPermissions($permissions);
+            $customer->syncPermissions($permissions);
         }
 
-        return $this->redirect($request, $user);
+        return $this->redirect($request, $customer);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \TypiCMS\Modules\Users\Models\User               $user
-     * @param \TypiCMS\Modules\Users\Http\Requests\FormRequest $request
+     * @param \Codivist\Modules\Customers\Models\Customer               $customer
+     * @param \Codivist\Modules\Customers\Http\Requests\FormRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(User $user, FormRequest $request)
+    public function update(Customer $customer, FormRequest $request)
     {
         $data = $request->all();
 
-        $userData = array_except($data, ['exit', 'permissions', 'roles', 'password_confirmation']);
+        $customerData = array_except($data, ['exit', 'permissions', 'roles', 'password_confirmation']);
 
-        if (!isset($userData['password']) || $userData['password'] === '') {
-            $userData = array_except($userData, 'password');
+        if (!isset($customerData['password']) || $customerData['password'] === '') {
+            $customerData = array_except($customerData, 'password');
         } else {
-            $userData['password'] = Hash::make($data['password']);
+            $customerData['password'] = Hash::make($data['password']);
         }
 
         $roles = $data['roles'] ?? [];
         $permissions = $data['permissions'] ?? [];
-        $user->roles()->sync($roles);
-        $user->syncPermissions($permissions);
+        $customer->roles()->sync($roles);
+        $customer->syncPermissions($permissions);
 
-        $this->repository->update($user->id, $userData);
+        $this->repository->update($customer->id, $customerData);
 
-        return $this->redirect($request, $user);
+        return $this->redirect($request, $customer);
     }
 }

@@ -1,21 +1,21 @@
 @extends('core::admin.master')
 
-@section('title', __('Users'))
+@section('title', __('customers'))
 
 @section('content')
 
 <item-list
-    url-base="/api/users"
+    url-base="/api/customers"
     locale="{{ config('typicms.content_locale') }}"
     fields="id,first_name,last_name,email,activated,superuser"
-    table="users"
-    title="users"
+    table="customers"
+    title="customers"
     :publishable="false"
     :searchable="['first_name,last_name,email']"
     :sorting="['first_name']">
 
     <template slot="add-button">
-        @include('core::admin._button-create', ['module' => 'users'])
+        @include('core::admin._button-create', ['module' => 'customers'])
     </template>
 
     <template slot="columns" slot-scope="{ sortArray }">
@@ -30,7 +30,7 @@
 
     <template slot="table-row" slot-scope="{ model, checkedModels, loading }">
         <td class="checkbox"><item-list-checkbox :model="model" :checked-models-prop="checkedModels" :loading="loading"></item-list-checkbox></td>
-        <td>@include('core::admin._button-edit', ['module' => 'users'])</td>
+        <td>@include('core::admin._button-edit', ['module' => 'customers'])</td>
         <td>@{{ model.first_name }}</td>
         <td>@{{ model.last_name }}</td>
         <td>@{{ model.email }}</td>

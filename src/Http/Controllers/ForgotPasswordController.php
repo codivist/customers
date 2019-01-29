@@ -1,6 +1,6 @@
 <?php
 
-namespace TypiCMS\Modules\Users\Http\Controllers;
+namespace Codivist\Modules\Customers\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
@@ -14,7 +14,7 @@ class ForgotPasswordController extends Controller
     |
     | This controller is responsible for handling password reset emails and
     | includes a trait which assists in sending these notifications from
-    | your application to your users. Feel free to explore this trait.
+    | your application to your customers. Feel free to explore this trait.
     |
     */
 
@@ -37,6 +37,6 @@ class ForgotPasswordController extends Controller
      */
     public function showLinkRequestForm()
     {
-        return view('users::passwords.email');
+        return view('customers::passwords.email');
     }
 }

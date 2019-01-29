@@ -1,6 +1,6 @@
 <?php
 
-namespace TypiCMS\Modules\Users\Http\Requests;
+namespace Codivist\Modules\Customers\Http\Requests;
 
 use TypiCMS\Modules\Core\Http\Requests\AbstractFormRequest;
 

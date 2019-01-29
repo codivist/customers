@@ -1,11 +1,11 @@
 {
-    "name": "typicms/users",
+    "name": "codivist/customers",
     "description": "",
     "license": "MIT",
     "authors": [
         {
-            "name": "Samuel De Backer",
-            "email": "sdebacker@gmail.com"
+            "name": "Dave Berry",
+            "email": "dave@codivist.com"
         }
     ],
     "require": {
@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-4": {
-            "TypiCMS\\Modules\\Users\\": "src/"
+            "Codivist\\Modules\\Customers\\": "src/"
         }
     },
     "minimum-stability": "dev",

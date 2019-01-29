@@ -1,6 +1,6 @@
 <?php
 
-namespace TypiCMS\Modules\Users\Notifications;
+namespace Codivist\Modules\Customers\Notifications;
 
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;

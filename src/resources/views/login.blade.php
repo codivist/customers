@@ -16,13 +16,13 @@
 
 <div id="login" class="container-login small-container">
 
-    @include('users::_logo')
+    @include('customers::_logo')
 
     {!! BootForm::open()->addClass('small-container-form') !!}
 
         <h1 class="small-container-title">{{ __('Log in') }}</h1>
 
-        @include('users::_status')
+        @include('customers::_status')
 
         {!! BootForm::email(('Email'), 'email')->addClass('form-control-lg')->autofocus(true)->required() !!}
         {!! BootForm::password(__('Password'), 'password')->addClass('form-control-lg')->required() !!}

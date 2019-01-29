@@ -1,6 +1,6 @@
 <?php
 
-namespace TypiCMS\Modules\Users\Providers;
+namespace Codivist\Modules\Customers\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
@@ -15,7 +15,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'TypiCMS\Modules\Users\Http\Controllers';
+    protected $namespace = 'Codivist\Modules\Customers\Http\Controllers';
 
     /**
      * Define the routes for the application.
@@ -56,11 +56,11 @@ class RouteServiceProvider extends ServiceProvider
              * Admin routes
              */
             $router->middleware('admin')->prefix('admin')->group(function (Router $router) {
-                $router->get('users', 'AdminController@index')->name('admin::index-users')->middleware('can:see-all-users');
-                $router->get('users/create', 'AdminController@create')->name('admin::create-user')->middleware('can:create-user');
-                $router->get('users/{user}/edit', 'AdminController@edit')->name('admin::edit-user')->middleware('can:update-user');
-                $router->post('users', 'AdminController@store')->name('admin::store-user')->middleware('can:create-user');
-                $router->put('users/{user}', 'AdminController@update')->name('admin::update-user')->middleware('can:update-user');
+                $router->get('customers', 'AdminController@index')->name('admin::index-customers')->middleware('can:see-all-customers');
+                $router->get('customers/create', 'AdminController@create')->name('admin::create-customer')->middleware('can:create-customer');
+                $router->get('customers/{customer}/edit', 'AdminController@edit')->name('admin::edit-customer')->middleware('can:update-customer');
+                $router->post('customers', 'AdminController@store')->name('admin::store-customer')->middleware('can:create-customer');
+                $router->put('customers/{customer}', 'AdminController@update')->name('admin::update-customer')->middleware('can:update-customer');
             });
 
             /*
@@ -68,10 +68,10 @@ class RouteServiceProvider extends ServiceProvider
              */
             $router->middleware('api')->prefix('api')->group(function (Router $router) {
                 $router->middleware('auth:api')->group(function (Router $router) {
-                    $router->get('users', 'ApiController@index')->middleware('can:see-all-users');
-                    $router->post('users/current/updatepreferences', 'ApiController@updatePreferences')->middleware('can:update-preferences');
-                    $router->patch('users/{user}', 'ApiController@updatePartial')->middleware('can:update-user');
-                    $router->delete('users/{user}', 'ApiController@destroy')->middleware('can:delete-user');
+                    $router->get('customers', 'ApiController@index')->middleware('can:see-all-customers');
+                    $router->post('customers/current/updatepreferences', 'ApiController@updatePreferences')->middleware('can:update-preferences');
+                    $router->patch('customers/{customer}', 'ApiController@updatePartial')->middleware('can:update-customer');
+                    $router->delete('customers/{customer}', 'ApiController@destroy')->middleware('can:delete-customer');
                 });
             });
         });

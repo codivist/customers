@@ -1,10 +1,10 @@
 <?php
 
-namespace TypiCMS\Modules\Users\Facades;
+namespace Codivist\Modules\Customers\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Users extends Facade
+class Customers extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -13,6 +13,6 @@ class Users extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'Users';
+        return 'Customers';
     }
 }

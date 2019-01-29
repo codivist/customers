@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'users' => [
-        'see-all-users' => 'View list',
-        'create-user' => 'Create',
-        'update-user' => 'Edit',
-        'delete-user' => 'Delete',
+    'customers' => [
+        'see-all-customers' => 'View list',
+        'create-customer' => 'Create',
+        'update-customer' => 'Edit',
+        'delete-customer' => 'Delete',
     ],
 ];

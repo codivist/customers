@@ -1,6 +1,6 @@
 <?php
 
-namespace TypiCMS\Modules\Users\Presenters;
+namespace Codivist\Modules\Customers\Presenters;
 
 use TypiCMS\Modules\Core\Presenters\Presenter;
 

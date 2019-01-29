@@ -1,6 +1,6 @@
 <?php
 
-namespace TypiCMS\Modules\Users\Http\Controllers;
+namespace Codivist\Modules\Customers\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\PasswordReset;
@@ -25,7 +25,7 @@ class ResetPasswordController extends Controller
     use ResetsPasswords;
 
     /**
-     * Where to redirect users after reset.
+     * Where to redirect customers after reset.
      *
      * @var string
      */
@@ -53,27 +53,27 @@ class ResetPasswordController extends Controller
      */
     public function showResetForm(Request $request, $token = null)
     {
-        return view('users::passwords.reset')->with(
+        return view('customers::passwords.reset')->with(
             ['token' => $token, 'email' => $request->email]
         );
     }
 
     /**
-     * Reset the given user's password.
+     * Reset the given customer's password.
      *
-     * @param \Illuminate\Contracts\Auth\CanResetPassword $user
+     * @param \Illuminate\Contracts\Auth\CanResetPassword $customer
      * @param string                                      $password
      *
      * @return void
      */
-    protected function resetPassword($user, $password)
+    protected function resetPassword($customer, $password)
     {
-        $user->password = Hash::make($password);
+        $customer->password = Hash::make($password);
 
-        $user->setRememberToken(Str::random(60));
+        $customer->setRememberToken(Str::random(60));
 
-        $user->save();
+        $customer->save();
 
-        event(new PasswordReset($user));
+        event(new PasswordReset($customer));
     }
 }
