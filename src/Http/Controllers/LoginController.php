@@ -62,11 +62,11 @@ class LoginController extends Controller
 
         $customer = Customer::where('email', $credentials['email'])->first();
         if (!$customer) {
-            $error = 'Cet utilisateur n’a pas été trouvé.';
+            $error = 'This user was not found.';
         } elseif (!$customer->activated) {
-            $error = 'Cet utilisateur n’a pas été activé.';
+            $error = 'This user has not been activated.';
         } else {
-            $error = 'Le mot de passe est incorrect.';
+            $error = 'Password is incorrect.';
         }
 
         $errors = [$this->username() => $error];
