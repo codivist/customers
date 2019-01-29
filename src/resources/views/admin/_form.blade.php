@@ -31,7 +31,6 @@
 {!! BootForm::hidden('activated')->value(0) !!}
 {!! BootForm::hidden('superuser')->value(0) !!}
 {!! BootForm::checkbox(__('Activated'), 'activated') !!}
-{!! BootForm::checkbox(__('Superuser'), 'superuser') !!}
 </div>
 
 @if ($roles = Roles::findAll() and $roles->count() > 0)
