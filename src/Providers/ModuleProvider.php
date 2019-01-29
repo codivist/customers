@@ -19,7 +19,7 @@ class ModuleProvider extends ServiceProvider
             __DIR__.'/../config/permissions.php', 'codivist.permissions'
         );
 
-        $modules = $this->app['config']['codivist']['modules'];
+        $modules = $this->app['config']['typicms']['modules'];
         $this->app['config']->set('codivist.modules', array_merge(['customers' => []], $modules));
 
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'customers');
